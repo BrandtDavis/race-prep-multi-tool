@@ -171,4 +171,4 @@ cython_debug/
 .pypirc
 
 # VSCode Workspace
-./flask_react.code-workspace
+flask_react.code-workspace
