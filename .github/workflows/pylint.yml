@@ -22,9 +22,5 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         cd server
-        echo $(ls)
-        which python
-        cat Pipfile
-        cat Pipfile.lock
         pipenv install --dev
-        pylint $(git ls-files '*.py')
+        pipenv run pylint $(git ls-files '*.py')
