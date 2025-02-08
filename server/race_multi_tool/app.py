@@ -1,7 +1,10 @@
 """ Define all the pace conversion APIs """
 import math
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+
+from .utils import utils
 
 app = Flask(__name__)
 cors = CORS(app, origin="*")
@@ -19,7 +22,7 @@ def miles_per_hour_to_mins_per_km() -> jsonify:
     # calculates fractional values as seconds
     mins = math.floor(mins_per_km)
     print("MINS: ", mins)
-    seconds = format_seconds(int((mins_per_km % 1) * 60))
+    seconds = utils.format_seconds(int((mins_per_km % 1) * 60))
     print("seconds: ", mins_per_km % 1 * 60)
 
     return jsonify({"min_per_km": f"{mins}:{seconds} per km"})
@@ -32,15 +35,30 @@ def kms_per_hour_to_mins_per_km():
 
     # calculates fractional values as seconds
     mins = math.floor(mins_per_km)
-    seconds = format_seconds(int((mins_per_km % 1) * 60))
+    seconds = utils.format_seconds(int((mins_per_km % 1) * 60))
 
     return jsonify({"min_per_km": f"{mins}:{seconds} per km"})
 
-def format_seconds(seconds: int):
-    """ Applies proper formatting to the seconds value """
-    if len(str(seconds)) == 1:
-        return f"{seconds}0"
-    return seconds
+@app.route("/convert_pace", methods=["GET"])
+def convert_pace():
+    """ Converts input pace to desired format """
+    pace = float(request.args.get("pace"))
+    input_units = float(request.args.get("input_units"))
+    output_units = float(request.args.get("output_units"))
+
+    # error checking
+
+    # determine what math we need to do
+    # parse input and output units to deterimine:
+    # input time and distance units
+    # output time and distance units
+
+    # cases:
+    # 1) min/x <-> min/y
+    # 2) x/hr <-> y/hr
+    # 3) x/hr <-> min/x
+    # 4) min/x <-> y/hr
+
 
 
 if __name__ == 'main':
