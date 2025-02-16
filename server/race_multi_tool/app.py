@@ -19,6 +19,7 @@ def convert_pace():
     """ Converts input pace to desired format """
     # e.g., 10, 4:50
     pace = str(request.args.get("pace"))
+    distance = float(request.args.get("distance"))
 
     # e.g., miles/hr
     input_units = str(request.args.get("input_units")).lower()
@@ -32,14 +33,14 @@ def convert_pace():
     # logic
     if input_units in DISTANCES_PER_HOUR:
         desired_pace = convert_dist_per_hour_to_min_per_dist(
-            float(pace),
+            distance,
             input_units,
             desired_units
         )
         result = {"result": desired_pace}
 
     if input_units in MINUTES_PER_DISTANCE:
-        desired_pace = convert_mins_per_dist_to_dist_per_hour(int(pace), input_units, desired_units)
+        desired_pace = convert_mins_per_dist_to_dist_per_hour(pace, input_units, desired_units)
         result = {"result": desired_pace}
 
     return jsonify(result)
