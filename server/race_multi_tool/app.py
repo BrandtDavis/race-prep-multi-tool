@@ -1,46 +1,49 @@
 """ Define all the pace conversion APIs """
 import math
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+
+from .utils.utils import (
+    DISTANCES_PER_HOUR,
+    MINUTES_PER_DISTANCE,
+    convert_dist_per_hour_to_min_per_dist,
+    convert_mins_per_dist_to_dist_per_hour,
+    )
 
 app = Flask(__name__)
 cors = CORS(app, origin="*")
 
-MILES_TO_KM = 1.60934
+@app.route("/convert_pace", methods=["GET"])
+def convert_pace():
+    """ Converts input pace to desired format """
+    # e.g., 10, 4:50
+    pace = str(request.args.get("pace"))
+    distance = float(request.args.get("distance"))
 
-@app.route("/miles_per_hour_to_mins_per_km", methods=['GET'])
-def miles_per_hour_to_mins_per_km() -> jsonify:
-    """ Converts miles per hour to minutes per km"""
-    miles_per_hour = request.args.get("miles_per_hour")
-    km_per_hour = float(miles_per_hour) * MILES_TO_KM
+    # e.g., miles/hr
+    input_units = str(request.args.get("input_units")).lower()
 
-    mins_per_km = 60.0 / float(km_per_hour)
+    # e.g., min/km
+    desired_units = str(request.args.get("output_units")).lower()
 
-    # calculates fractional values as seconds
-    mins = math.floor(mins_per_km)
-    print("MINS: ", mins)
-    seconds = format_seconds(int((mins_per_km % 1) * 60))
-    print("seconds: ", mins_per_km % 1 * 60)
+    # TODO: error checking
 
-    return jsonify({"min_per_km": f"{mins}:{seconds} per km"})
+    result = {}
+    # logic
+    if input_units in DISTANCES_PER_HOUR:
+        desired_pace = convert_dist_per_hour_to_min_per_dist(
+            distance,
+            input_units,
+            desired_units
+        )
+        result = {"result": desired_pace}
 
-@app.route("/kms_per_hour_to_mins_per_km", methods=['GET'])
-def kms_per_hour_to_mins_per_km():
-    """ Converts km per hour to minutes per km"""
-    km_per_hour = request.args.get("km_per_hour")
-    mins_per_km = 60.0 / float(km_per_hour)
+    if input_units in MINUTES_PER_DISTANCE:
+        desired_pace = convert_mins_per_dist_to_dist_per_hour(pace, input_units, desired_units)
+        result = {"result": desired_pace}
 
-    # calculates fractional values as seconds
-    mins = math.floor(mins_per_km)
-    seconds = format_seconds(int((mins_per_km % 1) * 60))
-
-    return jsonify({"min_per_km": f"{mins}:{seconds} per km"})
-
-def format_seconds(seconds: int):
-    """ Applies proper formatting to the seconds value """
-    if len(str(seconds)) == 1:
-        return f"{seconds}0"
-    return seconds
+    return jsonify(result)
 
 
 if __name__ == 'main':
