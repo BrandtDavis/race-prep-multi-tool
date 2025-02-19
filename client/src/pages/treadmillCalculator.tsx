@@ -1,4 +1,7 @@
 import '../App.css'
+import NumericInput from '../components/inputs/numericInput'
+import SelectInput from '../components/inputs/selectInput'
+import CalculateButton from '../components/inputs/calculateButton'
 
 function TreadmillCalculator() {
   
@@ -16,18 +19,55 @@ function TreadmillCalculator() {
   
     return (
       <>
-        <div className="max-w-sm rounded overflow-hidden shadow-lg">
-          <img className="w-full" src="/img/card-top.jpg" alt="Sunset in the mountains" />
+        <div className="mx-auto w-3/4 bg-gray-300 rounded overflow-hidden shadow-lg flex flex-wrap">
           <div className="px-6 py-4">
-            <div className="font-bold text-xl mb-2">The Coldest Sunset</div>
-            <p className="text-gray-700 text-base">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-            </p>
-          </div>
-          <div className="px-6 pt-4 pb-2">
-            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+
+            <div className="text-gray-700 text-basefont-bold text-xl mb-2">Treadmill Pace Converter</div>
+            <hr className="border-gray-600 mt-2"></hr>
+
+            <form 
+                method=""
+                className="w-full"
+            >
+                <div 
+                    id="paceConverterForm"
+                    className="container grid w-full grid-cols-6 gap-12 px-4 py-5"
+                >
+
+                    <div className="col-span-4 mb-4">
+                        <NumericInput inputId='distance' labelValue='Distance' placeholder='Distance' />
+                    </div>
+
+                    <div className="col-span-2 mb-4">
+                        <SelectInput 
+                            inputId='distancePerHourUnits' 
+                            labelValue='Units' 
+                            choices={[{value: "km/hour", text: "KM/Hour"}, {value: "miles/hour", text: "Miles/Hour"}]}
+                        />
+                    </div>
+
+                    <div className="col-span-2 mb-4">
+                        <NumericInput inputId='pace' labelValue='Minutes' placeholder='Minutes' />
+                    </div>
+
+                    <div className="col-span-2 mb-4">
+                        <NumericInput inputId='seconds' labelValue='Seconds' placeholder='Seconds' />
+                    </div>
+
+                    <div className="col-span-2 mb-4">
+                        <SelectInput 
+                            inputId='minutesPerDistanceUnits' 
+                            labelValue='Units' 
+                            choices={[{value: "mins/km", text: "Mins/KM"}, {value: "mins/mile", text: "Mins/Mile"}]}
+                        />
+                    </div>
+
+                    <div className="col-span-6 mb-4">
+                        <CalculateButton buttonText="Calculate" />
+                    </div>
+                </div>
+            </form>    
+
           </div>
         </div>
       </>
