@@ -1,21 +1,25 @@
-import '../App.css'
-import NumericInput from '../components/inputs/numericInput'
-import SelectInput from '../components/inputs/selectInput'
-import CalculateButton from '../components/inputs/calculateButton'
+import '../App.css';
+import NumericInput from '../components/inputs/numericInput';
+import SelectInput from '../components/inputs/selectInput';
+import CalculateButton from '../components/inputs/calculateButton';
+import { useState } from 'react';
 
 function TreadmillCalculator() {
+
+    const [distance, setDistance] = useState('');
+    const [minutes, setMinutes] = useState('');
+    const [seconds, setSeconds] = useState('');
+
+    const [distancePerHourUnits, setDistancePerHourUnits] = useState('');    
+    const [minutesPerDistanceUnit, setMinutesPerDistanceUnit] = useState('');
   
-    // const [data, setData] = useState('')
-  
-    // const fetchApi = async () => {
-    //   const response = await axios.get('http://localhost:5000/hello')
-    //   console.log(response.data)
-    //   setData(response.data.user)
-    // }
-  
-    // useEffect(() => {
-    //   fetchApi()
-    // }, [])
+    const handleClick = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+
+        const response = await fetch('http://localhost:5000/convert_pace?distance=10&pace=3:58&input_units=min/km&output_units=miles/hour');
+        const data = await response.json();
+        console.log("data: ", data);
+        console.log("event: ", event)
+    }
   
     return (
       <>
@@ -35,35 +39,62 @@ function TreadmillCalculator() {
                 >
 
                     <div className="col-span-4 mb-4">
-                        <NumericInput inputId='distance' labelValue='Distance' placeholder='Distance' />
+                        <NumericInput 
+                            inputId='distance' 
+                            fieldName='distance' 
+                            fieldValue={distance}
+                            onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDistance(event.target.value)}
+                            labelValue='Distance' 
+                            placeholder='Distance' 
+                        />
                     </div>
 
                     <div className="col-span-2 mb-4">
                         <SelectInput 
                             inputId='distancePerHourUnits' 
+                            fieldName='distancePerHourUnits' 
+                            fieldValue={distancePerHourUnits}
+                            onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDistancePerHourUnits(event.target.value)}
                             labelValue='Units' 
                             choices={[{value: "km/hour", text: "KM/Hour"}, {value: "miles/hour", text: "Miles/Hour"}]}
                         />
                     </div>
 
                     <div className="col-span-2 mb-4">
-                        <NumericInput inputId='pace' labelValue='Minutes' placeholder='Minutes' />
+                        <NumericInput 
+                            inputId='minutes' 
+                            fieldName='minutes'
+                            fieldValue={minutes}
+                            onChange={(event: React.ChangeEvent<HTMLInputElement>) => setMinutes(event.target.value)}
+                            labelValue='Minutes' 
+                            placeholder='Minutes' 
+                        />
                     </div>
 
                     <div className="col-span-2 mb-4">
-                        <NumericInput inputId='seconds' labelValue='Seconds' placeholder='Seconds' />
+                        <NumericInput 
+                            inputId='seconds' 
+                            fieldName='seconds'
+                            fieldValue={seconds} 
+                            onChange={(event: React.ChangeEvent<HTMLInputElement>) => setSeconds(event.target.value)}
+                            labelValue='Seconds' 
+                            placeholder='Seconds' 
+                        />
                     </div>
 
                     <div className="col-span-2 mb-4">
                         <SelectInput 
-                            inputId='minutesPerDistanceUnits' 
+                            inputId='minutesPerDistanceUnits'
+                            fieldName='minutesPerDistanceUnit' 
+                            fieldValue={minutesPerDistanceUnit}
+                            onChange={(event: React.ChangeEvent<HTMLInputElement>) => setMinutesPerDistanceUnit(event.target.value)}
                             labelValue='Units' 
                             choices={[{value: "mins/km", text: "Mins/KM"}, {value: "mins/mile", text: "Mins/Mile"}]}
                         />
                     </div>
 
                     <div className="col-span-6 mb-4">
-                        <CalculateButton buttonText="Calculate" />
+                        <CalculateButton buttonText="Calculate" handleClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleClick(event)}/>
                     </div>
                 </div>
             </form>    
