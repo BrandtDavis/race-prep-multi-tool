@@ -2,20 +2,17 @@ import '../App.css'
 import NumericInput from '../components/inputs/numericInput'
 import SelectInput from '../components/inputs/selectInput'
 import CalculateButton from '../components/inputs/calculateButton'
+import axios from 'axios'
+// import { useEffect } from 'react'
 
 function TreadmillCalculator() {
   
-    // const [data, setData] = useState('')
-  
-    // const fetchApi = async () => {
-    //   const response = await axios.get('http://localhost:5000/hello')
-    //   console.log(response.data)
-    //   setData(response.data.user)
-    // }
-  
-    // useEffect(() => {
-    //   fetchApi()
-    // }, [])
+    const handleClick = async() => {
+      const response = axios.get('http://localhost:5000/convert_pace?distance=10&pace=3:58&input_units=min/km&output_units=miles/hour')
+      response.then((res) => {
+          console.log("response:", res)
+      })
+    }
   
     return (
       <>
@@ -63,7 +60,7 @@ function TreadmillCalculator() {
                     </div>
 
                     <div className="col-span-6 mb-4">
-                        <CalculateButton buttonText="Calculate" />
+                        <CalculateButton buttonText="Calculate" handleClick={() => handleClick()}/>
                     </div>
                 </div>
             </form>    
