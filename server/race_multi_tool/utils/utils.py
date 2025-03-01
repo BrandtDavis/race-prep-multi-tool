@@ -7,8 +7,11 @@ MINUTES_PER_DISTANCE = ["min/km", "min/mile"]
 
 MILES_TO_KM = 1.60934
 
-def convert_mins_per_dist_to_dist_per_hour(pace: int, current_unit: str, desired_unit: str):
+def convert_mins_per_dist_to_dist_per_hour(pace: str, current_unit: str, desired_unit: str):
     """ Converts pace from mins/km or mins/mile to km/hour or miles/hour """
+    if pace == "0:00":
+        return "0.00"
+
     distance = 0
 
     unformatted_pace = calculate_unformatted_pace(pace)
@@ -26,12 +29,14 @@ def convert_mins_per_dist_to_dist_per_hour(pace: int, current_unit: str, desired
 
 def convert_dist_per_hour_to_min_per_dist(distance: int, current_unit: str, desired_unit: str):
     """ Converts pace from km/hour or miles/hour to mins/km or mins/mile """
-    mins_per_dist_unit = 60.0 / float(distance)
 
     current_distance_unit = get_distance_unit(current_unit)
     desired_distance_unit = get_distance_unit(desired_unit)
+    if distance == 0:
+        return f"0:00/{desired_distance_unit}"
 
     unit_const = 1.0
+    mins_per_dist_unit = 60.0 / float(distance)
     if current_distance_unit != desired_distance_unit:
         unit_const = MILES_TO_KM if current_distance_unit == 'km' else 1 / MILES_TO_KM
 
@@ -56,7 +61,7 @@ def get_distance_unit(unit: str):
     pace_units = unit.split("/")
 
     if pace_units[0] == "km" or pace_units[0] == "miles":
-        return pace_units[0]
+        return "km" if pace_units[0] == "km" else "mile"
 
     return pace_units[1]
 
