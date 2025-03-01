@@ -29,7 +29,7 @@ def convert_pace():
         return jsonify(
             {
                 "error": True,
-                "message": "One of 'pace' or 'distance' is required"
+                "message": "Error: one of 'pace' or 'distance' is required"
             }
         )
 
@@ -37,7 +37,7 @@ def convert_pace():
         return jsonify(
             {
                 "error": True,
-                "message": "Only one of 'pace' or 'distance' can be used at a time"
+                "message": "Error: only one of 'pace' or 'distance' can be used at a time"
             }
         )
 
@@ -45,7 +45,7 @@ def convert_pace():
         return jsonify(
             {
                 "error": True,
-                "message": "'distance' must be provided for the given 'input_units'"
+                "message": "Error: 'distance' must be provided for the given 'input_units'"
             }
         )
 
@@ -53,7 +53,7 @@ def convert_pace():
         return jsonify(
             {
                 "error": True,
-                "message": "'pace' must be provided for the given 'input_units'"
+                "message": "Error: 'pace' must be provided for the given 'input_units'"
             }
         )
 
@@ -62,12 +62,21 @@ def convert_pace():
 
     result = {}
     # logic
-    if input_units in DISTANCES_PER_HOUR:
-        distance = float(distance)
+    if distance is not None and input_units in DISTANCES_PER_HOUR:
+        try:
+            distance = float(distance)
+        except ValueError:
+            return jsonify(
+            {
+                "error": True,
+                "message": f"Error: distance value must be a number, received: '{distance}'"
+            }
+        )
+
         desired_pace = convert_dist_per_hour_to_min_per_dist(distance, input_units, desired_units)
         result = {"result": desired_pace}
 
-    if input_units in MINUTES_PER_DISTANCE:
+    if pace is not None and input_units in MINUTES_PER_DISTANCE:
         desired_pace = convert_mins_per_dist_to_dist_per_hour(pace, input_units, desired_units)
         result = {"result": desired_pace}
 
