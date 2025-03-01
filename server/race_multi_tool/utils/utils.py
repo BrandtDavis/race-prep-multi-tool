@@ -19,6 +19,13 @@ def convert_mins_per_dist_to_dist_per_hour(pace: str, current_unit: str, desired
     current_distance_unit = get_distance_unit(current_unit)
     desired_distance_unit = get_distance_unit(desired_unit)
 
+
+    if current_distance_unit == "Error":
+        return "Error: input distance units have invalid format"
+
+    if desired_distance_unit == "Error":
+        return "Error: output distance units have invalid format"
+
     unit_const = 1.0
     if current_distance_unit != desired_distance_unit:
         unit_const = MILES_TO_KM if current_distance_unit == 'km' else 1 / MILES_TO_KM
@@ -32,6 +39,13 @@ def convert_dist_per_hour_to_min_per_dist(distance: int, current_unit: str, desi
 
     current_distance_unit = get_distance_unit(current_unit)
     desired_distance_unit = get_distance_unit(desired_unit)
+
+    if current_distance_unit == "Error":
+        return "Error: input distance units have invalid format"
+
+    if desired_distance_unit == "Error":
+        return "Error: output distance units have invalid format"
+
     if distance == 0:
         return f"0:00/{desired_distance_unit}"
 
@@ -59,6 +73,9 @@ def calculate_distance_per_hour(pace: int, unit_const: int):
 def get_distance_unit(unit: str):
     """ return the distance unit for a given pace unit """
     pace_units = unit.split("/")
+
+    if len(pace_units) == 1:
+        return "Error"
 
     if pace_units[0] == "km" or pace_units[0] == "miles":
         return "km" if pace_units[0] == "km" else "mile"
