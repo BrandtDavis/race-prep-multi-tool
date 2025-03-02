@@ -1,13 +1,5 @@
-import "./App.css";
-import "./pages/treadmillCalculator";
-import TreadmillCalculator from "./pages/treadmillCalculator";
-
 function App() {
-  return (
-    <>
-      <TreadmillCalculator />
-    </>
-  );
+  return <div>stuff</div>;
 }
 
 export default App;
