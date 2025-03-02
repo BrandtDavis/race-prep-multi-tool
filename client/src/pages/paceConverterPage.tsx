@@ -1,10 +1,9 @@
-import "../App.css";
 import NumericInput from "../components/inputs/numericInput";
 import SelectInput from "../components/inputs/selectInput";
 import CalculateButton from "../components/inputs/calculateButton";
 import { useState } from "react";
 
-function TreadmillCalculator() {
+function PaceConverterPage() {
   const [distance, setDistance] = useState("");
   const [minutes, setMinutes] = useState("");
   const [seconds, setSeconds] = useState("");
@@ -24,7 +23,7 @@ function TreadmillCalculator() {
   };
 
   return (
-    <>
+    <div className="mx-auto">
       <div className="mx-auto w-3/4 bg-gray-300 rounded overflow-hidden shadow-lg flex flex-wrap">
         <div className="px-6 py-4">
           <div className="text-gray-700 text-basefont-bold text-xl mb-2">
@@ -120,8 +119,8 @@ function TreadmillCalculator() {
           </form>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
-export default TreadmillCalculator;
+export default PaceConverterPage;
