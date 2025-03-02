@@ -23,8 +23,8 @@ function PaceConverterPage() {
   };
 
   return (
-    <div className="mx-auto">
-      <div className="mx-auto w-3/4 bg-gray-300 rounded overflow-hidden shadow-lg flex flex-wrap">
+    <div className="flex h-screen">
+      <div className="m-auto w-1/2 bg-gray-300 rounded overflow-hidden shadow-lg flex-wrap">
         <div className="px-6 py-4">
           <div className="text-gray-700 text-basefont-bold text-xl mb-2">
             Treadmill Pace Converter
