@@ -4,13 +4,14 @@ import App from "./App.tsx";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import PaceConverterPage from "./pages/paceConverterPage.tsx";
 import CreateActivityPage from "./pages/createActivityPage.tsx";
+import Header from "./components/Header.tsx";
 
 const Layout = () => {
   return (
     <div>
-      <span>This be header</span>
+      <Header />
       <Outlet />
-      <span>This be footer</span>
+      <span>This will be a footer</span>
     </div>
   );
 };
