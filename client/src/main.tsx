@@ -6,6 +6,7 @@ import PaceConverterPage from "./pages/PaceConverterPage.tsx";
 import CreateActivityPage from "./pages/CreateActivityPage.tsx";
 import Header from "./components/Header.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
+import DashboardPage from "./pages/DashboardPage.tsx";
 
 const Layout = () => {
   return (
@@ -28,11 +29,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/pace-converter",
-        element: <PaceConverterPage />,
+        element: <DashboardPage />,
       },
       {
         path: "/create-activity",
         element: <CreateActivityPage />,
+      },
+      {
+        path: "/pace-converter",
+        element: <PaceConverterPage />,
       },
       {
         path: "/profile",
