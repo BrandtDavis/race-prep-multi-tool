@@ -2,9 +2,10 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import PaceConverterPage from "./pages/paceConverterPage.tsx";
-import CreateActivityPage from "./pages/createActivityPage.tsx";
+import PaceConverterPage from "./pages/PaceConverterPage.tsx";
+import CreateActivityPage from "./pages/CreateActivityPage.tsx";
 import Header from "./components/Header.tsx";
+import ProfilePage from "./pages/ProfilePage.tsx";
 
 const Layout = () => {
   return (
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "/create-activity",
         element: <CreateActivityPage />,
+      },
+      {
+        path: "/profile",
+        element: <ProfilePage />,
       },
     ],
   },
