@@ -7,6 +7,7 @@ import CreateActivityPage from "./pages/CreateActivityPage.tsx";
 import Header from "./components/Header.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
 import DashboardPage from "./pages/DashboardPage.tsx";
+import NotFoundPage from "./pages/NotFoundPage.tsx";
 
 const Layout = () => {
   return (
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
         element: <ProfilePage />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
   },
 ]);
 createRoot(document.getElementById("root")!).render(
