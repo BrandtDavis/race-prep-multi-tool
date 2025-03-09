@@ -29,7 +29,7 @@ const router = createBrowserRouter([
         element: <App />,
       },
       {
-        path: "/pace-converter",
+        path: "/dashboard",
         element: <DashboardPage />,
       },
       {
