@@ -13,6 +13,8 @@ tomli = "==2.2.1"
 flask = "*"
 pylint = "*"
 flask-cors = "*"
+psycopg2-binary = "*"
+dotenv = "*"
 
 [dev-packages]
 
