@@ -13,10 +13,11 @@ tomli = "==2.2.1"
 flask = "*"
 pylint = "*"
 flask-cors = "*"
-psycopg2-binary = "*"
 dotenv = "*"
+psycopg2-binary = "*"
+dataclasses = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.9"
+python_version = "3.13.2"
