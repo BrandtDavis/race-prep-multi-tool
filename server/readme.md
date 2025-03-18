@@ -8,3 +8,6 @@ To run tests for a particular module: run `pytest <path to test module>.py`
 
 ### To Add New Dependencies
 Run `pipenv install <library_name>`
+
+### Repository Design Pattern Resources
+- https://medium.com/better-programming/implementing-the-repository-pattern-in-python-using-sqlalchemy-as-a-backend-9f04c89fdf11
