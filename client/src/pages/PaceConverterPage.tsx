@@ -1,124 +1,72 @@
-import NumericInput from "../components/inputs/numericInput";
-import SelectInput from "../components/inputs/selectInput";
-import CalculateButton from "../components/inputs/calculateButton";
-import { useState } from "react";
+import PaceCalculatorCard from "../components/cards/PaceCalculatorCard";
+import SpeedCalculatorCard from "../components/cards/SpeedCalculatorCard";
+
+import { act, useState } from "react";
 
 function PaceConverterPage() {
-  const [distance, setDistance] = useState("");
-  const [minutes, setMinutes] = useState("");
-  const [seconds, setSeconds] = useState("");
+  const [activeTab, setActiveTab] = useState("tab1")
 
-  const [distancePerHourUnits, setDistancePerHourUnits] = useState("");
-  const [minutesPerDistanceUnit, setMinutesPerDistanceUnit] = useState("");
+  const tabs = [
+    {id: "tab1", label: "Pace"},
+    {id: "tab2", label: "Speed"}
+  ];
 
-  const handleClick = async (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => {
-    const response = await fetch(
-      "http://localhost:5000/convert_pace?distance=10&pace=3:58&input_units=min/km&output_units=miles/hour",
-    );
-    const data = await response.json();
-    console.log("data: ", data);
-    console.log("event: ", event);
-  };
+  const tabContent = {
+    tab1: (
+      <div>
+        <h2 className="mb-3 text-2xl font-bold">Pace</h2>
+          <PaceCalculatorCard />
+      </div>
+    ),
+    tab2: (
+      <div>
+        <h2 className="mb-3 text-2xl font-bold">Speed</h2>
+          <SpeedCalculatorCard />
+      </div>
+    )
+  }
 
   return (
-    <div className="flex h-screen">
-      <div className="m-auto w-1/2 bg-gray-300 rounded overflow-hidden shadow-lg flex-wrap">
-        <div className="px-6 py-4">
-          <div className="text-gray-700 text-basefont-bold text-xl mb-2">
-            Treadmill Pace Converter
-          </div>
-          <hr className="border-gray-600 mt-2"></hr>
-
-          <form method="" className="w-full">
-            <div
-              id="paceConverterForm"
-              className="container grid w-full grid-cols-6 gap-12 px-4 py-5"
+    <div className="min h-screen w-full flex items-center justify-center
+      bg-gradient-to-r from-blue-200 via-blue-100 to-blue-200">
+        <div className="max-w-[500px] rounded-3xl border bg-gray-300 p-8 mx-10 shadow-xl space-y-5">
+        
+        {/* Tabs */}
+        <div className="flex flex-wrap border-b">
+          {tabs.map((tab) => (
+            <button 
+              key={tab.id}
+              className={`px-4 py-2 font-semibold ${
+                activeTab == tab.id 
+                  ? "border-b-2 border-purple-5 text-purple-500" 
+                  : "text-gray-500 hover:text-purple-500"
+              }`}
+              onClick={() => setActiveTab(tab.id)}
             >
-              <div className="col-span-4 mb-4">
-                <NumericInput
-                  inputId="distance"
-                  fieldName="distance"
-                  fieldValue={distance}
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    setDistance(event.target.value)
-                  }
-                  labelValue="Distance"
-                  placeholder="Distance"
-                />
-              </div>
-
-              <div className="col-span-2 mb-4">
-                <SelectInput
-                  inputId="distancePerHourUnits"
-                  fieldName="distancePerHourUnits"
-                  fieldValue={distancePerHourUnits}
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    setDistancePerHourUnits(event.target.value)
-                  }
-                  labelValue="Units"
-                  choices={[
-                    { value: "km/hour", text: "KM/Hour" },
-                    { value: "miles/hour", text: "Miles/Hour" },
-                  ]}
-                />
-              </div>
-
-              <div className="col-span-2 mb-4">
-                <NumericInput
-                  inputId="minutes"
-                  fieldName="minutes"
-                  fieldValue={minutes}
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    setMinutes(event.target.value)
-                  }
-                  labelValue="Minutes"
-                  placeholder="Minutes"
-                />
-              </div>
-
-              <div className="col-span-2 mb-4">
-                <NumericInput
-                  inputId="seconds"
-                  fieldName="seconds"
-                  fieldValue={seconds}
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    setSeconds(event.target.value)
-                  }
-                  labelValue="Seconds"
-                  placeholder="Seconds"
-                />
-              </div>
-
-              <div className="col-span-2 mb-4">
-                <SelectInput
-                  inputId="minutesPerDistanceUnits"
-                  fieldName="minutesPerDistanceUnit"
-                  fieldValue={minutesPerDistanceUnit}
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    setMinutesPerDistanceUnit(event.target.value)
-                  }
-                  labelValue="Units"
-                  choices={[
-                    { value: "mins/km", text: "Mins/KM" },
-                    { value: "mins/mile", text: "Mins/Mile" },
-                  ]}
-                />
-              </div>
-
-              <div className="col-span-6 mb-4">
-                <CalculateButton
-                  buttonText="Calculate"
-                  handleClick={(
-                    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-                  ) => handleClick(event)}
-                />
-              </div>
-            </div>
-          </form>
+              {tab.label}
+            </button>
+          ))}
         </div>
-      </div>
+
+        {/* Tab Contents */}
+        <div>
+          {tabContent[activeTab]}
+        </div>
+        </div>
+
+      {/* <div className="flex h-screen"> */}
+        {/* <div className="m-auto w-1/2 bg-gray-300 rounded overflow-hidden shadow-lg flex-wrap"> */}
+          {/* <div className="px-6 py-4"> */}
+            {/* <div className="text-gray-700 text-basefont-bold text-xl mb-2"> */}
+              {/* Treadmill Pace Converter */}
+            {/* </div> */}
+            {/* <hr className="border-gray-600 mt-2"></hr> */}
+
+            {/* <form method="" className="w-full"> */}
+            {/* </form> */}
+          {/* </div> */}
+        {/* </div> */}
+      {/* </div> */}
     </div>
   );
 }
