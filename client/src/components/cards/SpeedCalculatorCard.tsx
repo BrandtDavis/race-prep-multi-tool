@@ -23,47 +23,55 @@ function SpeedCalculatorCard() {
     
   return (
     <div>
-        {/* Inputs */}
-        <div className="col-span-4 mb-4">
-            <NumericInput
-                inputId="distance"
-                fieldName="distance"
-                fieldValue={distance}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setDistance(event.target.value)
-                }
-                labelValue="Distance"
-                placeholder="Distance"
-            />
-        </div>
+        <form method="" className="w-full">
+            <div
+              id="paceConverterForm"
+              className="container grid w-full grid-cols-6 gap-12 px-4 py-5"
+            >
+                {/* Inputs */}
+                <div className="col-span-4 mb-4">
+                    <NumericInput
+                        inputId="distance"
+                        fieldName="distance"
+                        fieldValue={distance}
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                        setDistance(event.target.value)
+                        }
+                        labelValue="Distance"
+                        placeholder="Distance"
+                    />
+                </div>
 
-        <div className="col-span-2 mb-4">
-                <SelectInput
-                  inputId="speedUnits"
-                  fieldName="speedUnits"
-                  fieldValue={speedUnits}
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    setSpeedUnits(event.target.value)
-                  }
-                  labelValue="Units"
-                  choices={[
-                    { value: "km/hour", text: "KM/Hour" },
-                    { value: "miles/hour", text: "Miles/Hour" },
-                  ]}
-                />
-        </div>
+                <div className="col-span-2 mb-4">
+                        <SelectInput
+                        inputId="speedUnits"
+                        fieldName="speedUnits"
+                        fieldValue={speedUnits}
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                            setSpeedUnits(event.target.value)
+                        }
+                        labelValue="Units"
+                        choices={[
+                            { value: "km/hour", text: "KM/Hour" },
+                            { value: "miles/hour", text: "Miles/Hour" },
+                        ]}
+                        />
+                </div>
 
-        <div className="col-span-6 mb-4">
-            <CalculateButton
-                    buttonText="Calculate"
-                    handleClick={(
-                        event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-                    ) => handleClick(event)}
-            />
-        </div>
-
+                <div className="col-span-6 mb-4">
+                    <CalculateButton
+                            buttonText="Calculate"
+                            handleClick={(
+                                event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+                            ) => handleClick(event)}
+                    />
+                </div>
+            </div>
+        </form>
         {/* Results Section */}
-        
+        <div>
+            
+        </div>
     </div>
   )
 }
