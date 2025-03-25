@@ -1,31 +1,35 @@
 import PaceCalculatorCard from "../components/cards/PaceCalculatorCard";
 import SpeedCalculatorCard from "../components/cards/SpeedCalculatorCard";
 
-import { act, useState } from "react";
+import { useState } from "react";
 
 function PaceConverterPage() {
   const [activeTab, setActiveTab] = useState("tab1")
 
   const tabs = [
-    {id: "tab1", label: "Pace"},
-    {id: "tab2", label: "Speed"}
+    {
+      id: "tab1", 
+      label: "Pace",
+    },
+    {
+      id: "tab2", 
+      label: "Speed", 
+    }
   ];
 
-  const tabContent = {
-    tab1: (
-      <div>
-        <h2 className="mb-3 text-2xl font-bold">Pace</h2>
-          <PaceCalculatorCard />
-      </div>
-    ),
-    tab2: (
-      <div>
-        <h2 className="mb-3 text-2xl font-bold">Speed</h2>
-          <SpeedCalculatorCard />
-      </div>
-    )
-  }
+  const paceTab = (
+    <div>
+      <PaceCalculatorCard />
+    </div>
+  )
 
+  const speedTab = (
+    <div>
+      <h2 className="mb-3 text-2xl font-bold">Speed</h2>
+      <SpeedCalculatorCard />
+    </div>
+  )
+  
   return (
     <div className="min h-screen w-full flex items-center justify-center
       bg-gradient-to-r from-blue-200 via-blue-100 to-blue-200">
@@ -50,23 +54,9 @@ function PaceConverterPage() {
 
         {/* Tab Contents */}
         <div>
-          {tabContent[activeTab]}
+          {activeTab === "tab1" ? paceTab : speedTab}
         </div>
-        </div>
-
-      {/* <div className="flex h-screen"> */}
-        {/* <div className="m-auto w-1/2 bg-gray-300 rounded overflow-hidden shadow-lg flex-wrap"> */}
-          {/* <div className="px-6 py-4"> */}
-            {/* <div className="text-gray-700 text-basefont-bold text-xl mb-2"> */}
-              {/* Treadmill Pace Converter */}
-            {/* </div> */}
-            {/* <hr className="border-gray-600 mt-2"></hr> */}
-
-            {/* <form method="" className="w-full"> */}
-            {/* </form> */}
-          {/* </div> */}
-        {/* </div> */}
-      {/* </div> */}
+      </div>
     </div>
   );
 }
