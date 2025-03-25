@@ -23,13 +23,16 @@ function PaceCalculatorCard() {
     
     return (
         <div>
+
              <form method="" className="w-full">
                 <div
                 id="paceConverterForm"
-                className="container grid w-full grid-cols-6 gap-12 px-4 py-5"
+                className="container grid w-full grid-cols-6 gap-6 px-4 py-2"
                 >
+                <h2 className="col-span-6 text-2xl font-bold">From</h2>
+
                 {/* Inputs */}
-                <div className="col-span-2 mb-4">
+                <div className="col-span-2 mb-2">
                     <NumericInput
                     inputId="minutes"
                     fieldName="minutes"
@@ -42,7 +45,7 @@ function PaceCalculatorCard() {
                     />
                 </div>
 
-                <div className="col-span-2 mb-4">
+                <div className="col-span-2 mb-2">
                     <NumericInput
                     inputId="seconds"
                     fieldName="seconds"
@@ -55,7 +58,7 @@ function PaceCalculatorCard() {
                     />
                 </div>
 
-                <div className="col-span-2 mb-4">
+                <div className="col-span-2 mb-2">
                     <SelectInput
                     inputId="paceUnitss"
                     fieldName="paceUnits"
@@ -71,6 +74,25 @@ function PaceCalculatorCard() {
                     />
                 </div>
 
+                <hr className="col-span-6"/>
+
+                <h2 className="col-span-6 text-2xl font-bold">To</h2>
+                <div className="col-span-6 mb-2">
+                    <SelectInput
+                    inputId="paceUnitss"
+                    fieldName="paceUnits"
+                    fieldValue={paceUnits}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                        setPaceUnits(event.target.value)
+                    }
+                    labelValue="Units"
+                    choices={[
+                        { value: "kph", text: "KM/Hour" },
+                        { value: "mph", text: "Miles/Hour" },
+                    ]}
+                    />
+                </div>
+
                 <div className="col-span-6 mb-4">
                     <CalculateButton
                     buttonText="Calculate"
@@ -79,8 +101,10 @@ function PaceCalculatorCard() {
                     ) => handleClick(event)}
                     />
                 </div>
-
-                {/* Results Section */}
+                    <h2 className="col-span-1 text-xl font-bold"> Result: </h2>
+                    <span className="col-span-2 ml-2 my-auto">4:00 Min/km</span>
+                    <span className="my-auto"> is </span>
+                    <span className="col-span-2 ml-2 my-auto">4:00 Min/km</span>
                 </div>
             </form>
         </div>
