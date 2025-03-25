@@ -25,11 +25,12 @@ function SpeedCalculatorCard() {
     <div>
         <form method="" className="w-full">
             <div
-              id="paceConverterForm"
-              className="container grid w-full grid-cols-6 gap-12 px-4 py-5"
+              id="speedConverterForm"
+              className="container grid w-full grid-cols-6 gap-6 px-4 py-2"
             >
+                <h2 className="col-span-6 text-2xl font-bold">From</h2>
                 {/* Inputs */}
-                <div className="col-span-4 mb-4">
+                <div className="col-span-4 mb-2">
                     <NumericInput
                         inputId="distance"
                         fieldName="distance"
@@ -42,7 +43,7 @@ function SpeedCalculatorCard() {
                     />
                 </div>
 
-                <div className="col-span-2 mb-4">
+                <div className="col-span-2 mb-2">
                         <SelectInput
                         inputId="speedUnits"
                         fieldName="speedUnits"
@@ -58,6 +59,25 @@ function SpeedCalculatorCard() {
                         />
                 </div>
 
+                <hr className="col-span-6"/>
+
+                <h2 className="col-span-6 text-2xl font-bold">To</h2>
+                <div className="col-span-6 mb-2">
+                    <SelectInput
+                    inputId="speedUnits"
+                    fieldName="speedUnits"
+                    fieldValue={speedUnits}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                        setSpeedUnits(event.target.value)
+                    }
+                    labelValue="Units"
+                    choices={[
+                        { value: "kph", text: "KM/Hour" },
+                        { value: "mph", text: "Miles/Hour" },
+                    ]}
+                    />
+                </div>
+
                 <div className="col-span-6 mb-4">
                     <CalculateButton
                             buttonText="Calculate"
@@ -66,6 +86,10 @@ function SpeedCalculatorCard() {
                             ) => handleClick(event)}
                     />
                 </div>
+                    <h2 className="col-span-1 text-xl font-bold"> Result: </h2>
+                    <span className="col-span-2 ml-2 my-auto">4:00 Min/km</span>
+                    <span className="my-auto"> is </span>
+                    <span className="col-span-2 ml-2 my-auto">4:00 Min/km</span>
             </div>
         </form>
         {/* Results Section */}

@@ -25,7 +25,6 @@ function PaceConverterPage() {
 
   const speedTab = (
     <div>
-      <h2 className="mb-3 text-2xl font-bold">Speed</h2>
       <SpeedCalculatorCard />
     </div>
   )
