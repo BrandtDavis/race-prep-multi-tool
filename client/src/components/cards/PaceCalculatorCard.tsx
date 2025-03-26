@@ -26,8 +26,8 @@ function PaceCalculatorCard() {
 
              <form method="" className="w-full">
                 <div
-                id="paceConverterForm"
-                className="container grid w-full grid-cols-6 gap-6 px-4 py-2"
+                    id="paceConverterForm"
+                    className="container grid w-full grid-cols-6 gap-6 px-4 py-2"
                 >
                 <h2 className="col-span-6 text-2xl font-bold">From</h2>
 
@@ -79,7 +79,7 @@ function PaceCalculatorCard() {
                 <h2 className="col-span-6 text-2xl font-bold">To</h2>
                 <div className="col-span-6 mb-2">
                     <SelectInput
-                    inputId="paceUnitss"
+                    inputId="paceUnits"
                     fieldName="paceUnits"
                     fieldValue={paceUnits}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
