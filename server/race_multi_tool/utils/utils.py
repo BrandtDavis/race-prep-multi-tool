@@ -2,13 +2,13 @@
 
 import math
 
-DISTANCES_PER_HOUR = ["km/hour", "miles/hour"]
-MINUTES_PER_DISTANCE = ["min/km", "min/mile"]
+SPEED_UNITS = ["km/hour", "miles/hour"]
+PACE_UNITS = ["min/km", "min/mile"]
 
 MILES_TO_KM = 1.60934
 
-def convert_mins_per_dist_to_dist_per_hour(pace: str, current_unit: str, desired_unit: str):
-    """ Converts pace from mins/km or mins/mile to km/hour or miles/hour """
+def convert_pace_to_speed(pace: str, current_unit: str, desired_unit: str):
+    """ Converts pace (e.g., mins/km) to speed (e.g., miles/hour) """
     if pace == "0:00":
         return "0.00"
 
@@ -34,7 +34,7 @@ def convert_mins_per_dist_to_dist_per_hour(pace: str, current_unit: str, desired
 
     return f"{distance:.2f}"
 
-def convert_dist_per_hour_to_min_per_dist(distance: int, current_unit: str, desired_unit: str):
+def convert_speed_to_pace(distance: int, current_unit: str, desired_unit: str):
     """ Converts pace from km/hour or miles/hour to mins/km or mins/mile """
 
     current_distance_unit = get_distance_unit(current_unit)
