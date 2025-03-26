@@ -6,20 +6,30 @@ import { useState } from "react";
 
 
 function SpeedCalculatorCard() {
-    const handleClick = async (
-        event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-      ) => {
-        const response = await fetch(
-          "http://localhost:5000/convert_pace?distance=10&pace=3:58&input_units=min/km&output_units=miles/hour",
-        );
-        const data = await response.json();
-        console.log("data: ", data);
-        console.log("event: ", event);
-      };
-
-    const [distance, setDistance] = useState("");
-  
+    const [speed, setspeed] = useState("");
     const [speedUnits, setSpeedUnits] = useState("");
+    const [paceUnits, setPaceUnits] = useState("");
+
+    const [pace, setPace] = useState("");
+
+    const handleClick = async () => {
+        const response = await fetch(
+            'http://localhost:5000/convert_speed?' + new URLSearchParams({
+                speed: speed,
+                input_units: speedUnits,
+                output_units: paceUnits,
+            }), 
+        {
+            method: 'GET',
+            headers: {
+                Accept: 'application/form-data',
+                'Content-Type': 'application/json',
+            },
+        });
+
+        const data = await response.json();
+        setPace(data.result)
+      };
     
   return (
     <div>
@@ -32,14 +42,14 @@ function SpeedCalculatorCard() {
                 {/* Inputs */}
                 <div className="col-span-4 mb-2">
                     <NumericInput
-                        inputId="distance"
-                        fieldName="distance"
-                        fieldValue={distance}
+                        inputId="speed"
+                        fieldName="speed"
+                        fieldValue={speed}
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                        setDistance(event.target.value)
+                        setspeed(event.target.value)
                         }
-                        labelValue="Distance"
-                        placeholder="Distance"
+                        labelValue="Speed"
+                        placeholder="Speed"
                     />
                 </div>
 
@@ -64,16 +74,16 @@ function SpeedCalculatorCard() {
                 <h2 className="col-span-6 text-2xl font-bold">To</h2>
                 <div className="col-span-6 mb-2">
                     <SelectInput
-                    inputId="speedUnits"
-                    fieldName="speedUnits"
-                    fieldValue={speedUnits}
+                    inputId="paceUnits"
+                    fieldName="paceUnits"
+                    fieldValue={paceUnits}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                        setSpeedUnits(event.target.value)
+                        setPaceUnits(event.target.value)
                     }
                     labelValue="Units"
                     choices={[
-                        { value: "kph", text: "KM/Hour" },
-                        { value: "mph", text: "Miles/Hour" },
+                        { value: "min/km", text: "Min/KM" },
+                        { value: "min/mile", text: "Min/Mile" },
                     ]}
                     />
                 </div>
@@ -81,15 +91,13 @@ function SpeedCalculatorCard() {
                 <div className="col-span-6 mb-4">
                     <CalculateButton
                             buttonText="Calculate"
-                            handleClick={(
-                                event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-                            ) => handleClick(event)}
+                            handleClick={() => handleClick()}
                     />
                 </div>
                     <h2 className="col-span-1 text-xl font-bold"> Result: </h2>
-                    <span className="col-span-2 ml-2 my-auto">4:00 Min/km</span>
-                    <span className="my-auto"> is </span>
-                    <span className="col-span-2 ml-2 my-auto">4:00 Min/km</span>
+                    <span className="col-span-2 ml-2 my-auto"> {speed || null} {speedUnits || null} </span>
+                    <span className="my-auto"> {pace === "" ? null : "is"} </span>
+                    <span className="col-span-2 ml-2 my-auto"> {pace || null} </span>
             </div>
         </form>
         {/* Results Section */}

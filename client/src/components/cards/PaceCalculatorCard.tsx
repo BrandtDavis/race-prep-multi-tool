@@ -9,17 +9,29 @@ function PaceCalculatorCard() {
     const [seconds, setSeconds] = useState("");
 
     const [paceUnits, setPaceUnits] = useState("");
+    const [speedUnits, setSpeedUnits] = useState("");
 
-    const handleClick = async (
-        event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-      ) => {
+    const [speed, setSpeed] = useState("");
+
+    const handleClick = async () => {
         const response = await fetch(
-          "http://localhost:5000/convert_pace?distance=10&pace=3:58&input_units=min/km&output_units=miles/hour",
-        );
+          'http://localhost:5000/convert_pace?' + new URLSearchParams({
+                pace: `${minutes}:${seconds}`,
+                input_units: paceUnits,
+                output_units: speedUnits,
+            }),
+        { 
+            method: 'GET',
+            headers: {
+                Accept: 'application/form-data',
+                'Content-Type': 'application/json',
+            },
+        });
+
         const data = await response.json();
-        console.log("data: ", data);
-        console.log("event: ", event);
-      };
+        setSpeed(data.result)
+
+    };
     
     return (
         <div>
@@ -60,7 +72,7 @@ function PaceCalculatorCard() {
 
                 <div className="col-span-2 mb-2">
                     <SelectInput
-                    inputId="paceUnitss"
+                    inputId="paceUnits"
                     fieldName="paceUnits"
                     fieldValue={paceUnits}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
@@ -68,8 +80,8 @@ function PaceCalculatorCard() {
                     }
                     labelValue="Units"
                     choices={[
-                        { value: "mins/km", text: "Mins/KM" },
-                        { value: "mins/mile", text: "Mins/Mile" },
+                        { value: "min/km", text: "Mins/KM" },
+                        { value: "min/mile", text: "Mins/Mile" },
                     ]}
                     />
                 </div>
@@ -79,16 +91,16 @@ function PaceCalculatorCard() {
                 <h2 className="col-span-6 text-2xl font-bold">To</h2>
                 <div className="col-span-6 mb-2">
                     <SelectInput
-                    inputId="paceUnits"
-                    fieldName="paceUnits"
-                    fieldValue={paceUnits}
+                    inputId="speedUnits"
+                    fieldName="speedUnits"
+                    fieldValue={speedUnits}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                        setPaceUnits(event.target.value)
+                        setSpeedUnits(event.target.value)
                     }
                     labelValue="Units"
                     choices={[
-                        { value: "kph", text: "KM/Hour" },
-                        { value: "mph", text: "Miles/Hour" },
+                        { value: "km/hour", text: "KM/Hour" },
+                        { value: "miles/hour", text: "Miles/Hour" },
                     ]}
                     />
                 </div>
@@ -96,15 +108,13 @@ function PaceCalculatorCard() {
                 <div className="col-span-6 mb-4">
                     <CalculateButton
                     buttonText="Calculate"
-                    handleClick={(
-                        event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-                    ) => handleClick(event)}
+                    handleClick={() => handleClick()}
                     />
                 </div>
                     <h2 className="col-span-1 text-xl font-bold"> Result: </h2>
-                    <span className="col-span-2 ml-2 my-auto">4:00 Min/km</span>
-                    <span className="my-auto"> is </span>
-                    <span className="col-span-2 ml-2 my-auto">4:00 Min/km</span>
+                    <span className="col-span-2 ml-2 my-auto"> {minutes || null}:{seconds || null} {paceUnits || null} </span>
+                    <span className="my-auto"> {speed === "" ? null : "is"} </span>
+                    <span className="col-span-2 ml-2 my-auto"> {speed.split('.')[0] || null} {speed != "" ? speedUnits : null}</span>
                 </div>
             </form>
         </div>
