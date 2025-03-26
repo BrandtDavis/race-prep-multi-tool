@@ -22,7 +22,7 @@ cors = CORS(app, origin="*")
 @app.route("/convert_speed", methods=["GET"])
 def convert_speed():
     """ Converts input speed (e.g., km/hr) to pace (e.g., min/km) """
-    distance = request.args.get("distance")
+    speed = request.args.get("speed")
 
     # e.g., miles/hr
     input_units = request.args.get("input_units")
@@ -30,8 +30,8 @@ def convert_speed():
     # e.g., min/km
     output_units = request.args.get("output_units")
 
-    if distance is None:
-        return empty_param_error("distance")
+    if speed is None:
+        return empty_param_error("speed")
 
     if input_units not in SPEED_UNITS:
         return invalid_param_value_error("input_units", SPEED_UNITS)
@@ -43,11 +43,11 @@ def convert_speed():
     output_units = output_units.lower()
 
     try:
-        distance = float(distance)
+        speed = float(speed)
     except ValueError:
-        return param_type_error("distance", "number", str(distance))
+        return param_type_error("speed", "number", str(speed))
 
-    desired_pace = convert_speed_to_pace(distance, input_units, output_units)
+    desired_pace = convert_speed_to_pace(speed, input_units, output_units)
     result = {"result": desired_pace}
 
     return jsonify(result)
