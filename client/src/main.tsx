@@ -5,6 +5,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import PaceConverterPage from "./pages/PaceConverterPage.tsx";
 import CreateActivityPage from "./pages/CreateActivityPage.tsx";
 import Header from "./components/Header.tsx";
+import Footer from "./components/Footer.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
 import DashboardPage from "./pages/DashboardPage.tsx";
 import NotFoundPage from "./pages/NotFoundPage.tsx";
@@ -14,7 +15,7 @@ const Layout = () => {
     <div>
       <Header />
       <Outlet />
-      <span>This will be a footer</span>
+      <Footer />
     </div>
   );
 };
