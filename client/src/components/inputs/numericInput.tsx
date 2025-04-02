@@ -19,14 +19,14 @@ function NumericInput({
     <>
       <label
         className="flex text-gray-700 text-sm font-bold mb-2"
-        htmlFor="distance"
+        htmlFor={inputId}
       >
         {labelValue}
       </label>
 
       <input
         className="shadow appearance-none border rounded w-full py-2 px-3 bg-white text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        type="text"
+        type="number"
         id={inputId}
         name={fieldName}
         onChange={onChange}
