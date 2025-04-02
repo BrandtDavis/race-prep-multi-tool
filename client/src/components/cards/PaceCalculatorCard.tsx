@@ -30,7 +30,6 @@ function PaceCalculatorCard() {
 
         const data = await response.json();
         setSpeed(data.result)
-
     };
     
     return (
