@@ -19,7 +19,7 @@ function NumericInput({
     <>
       <label
         className="flex text-gray-700 text-sm font-bold mb-2"
-        htmlFor="distance"
+        htmlFor={inputId}
       >
         {labelValue}
       </label>
