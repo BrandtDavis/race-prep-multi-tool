@@ -1,4 +1,4 @@
-""" Stuff """
+""" Functions to be called by the pace conversion routes """
 
 from ..utils.utils import (
     SPEED_UNITS,
