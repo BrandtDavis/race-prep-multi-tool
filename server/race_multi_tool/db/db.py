@@ -26,7 +26,11 @@ class DatabaseConnection:
         """ Return DB connection """
         conn = psycopg2.connect(self.connection_string)
         print(conn)
+        cur = conn.cursor()
+        id_num = 1
+        cur.execute(f"SELECT * FROM users WHERE id={id_num};")
+        print(cur.fetchall())
         return conn
-        # id_num = 1
-        # cur.execute(f"SELECT * FROM users WHERE id={id_num};")
-        # print(cur.fetchall())
+
+    def close_connection(self):
+        """ Close the DB connection"""
