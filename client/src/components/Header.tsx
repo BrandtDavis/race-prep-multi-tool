@@ -25,7 +25,7 @@ function Header() {
     useEffect(() => {
         (async () => {
             const userData = await getUserData()
-            setUserName(`${userData[1]} ${userData[2]}`)
+            setUserName(`${userData["first_name"]} ${userData["last_name"]}`)
         })()
     }, []);
 
