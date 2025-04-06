@@ -7,6 +7,10 @@ from .api.pace_functions import (
     convert_pace_api
 )
 
+from .api.user_data import (
+    get_user_data_by_id_api
+)
+
 app = Flask(__name__)
 cors = CORS(app, origin="*")
 
@@ -41,6 +45,15 @@ def convert_pace():
     result = convert_pace_api(pace, input_units, output_units)
 
     return jsonify(result)
+
+@app.route("/get_user_data", methods=["GET"])
+def get_user_data():
+    " Gets user data based on id "
+    user_id = request.args.get("user_id")
+
+    data = get_user_data_by_id_api(user_id)
+
+    return jsonify(data)
 
 if __name__ == 'main':
     app.run(debug=True)
