@@ -3,16 +3,29 @@ import os
 from dotenv import load_dotenv
 import psycopg2
 
-load_dotenv()
+class DatabaseConnection:
+    """ Class to instantiate when connecting to database """
+    connection_string = None
 
-try:
-    db_name = os.getenv('DB_NAME')
-    db_username = os.getenv('DB_USERNAME')
-    db_password = os.getenv('DB_PASSWORD')
-    db_port = os.getenv('DB_PORT')
-except KeyError as e:
-    print("KeyError Exception -", e)
+    def __init__(self):
+        load_dotenv()
 
-conn_string = f"dbname={db_name} user={db_username} password={db_password} port={db_port}"
+        try:
+            db_name = os.getenv('DB_NAME')
+            db_username = os.getenv('DB_USERNAME')
+            # db_password = os.getenv('DB_PASSWORD')
+            db_port = os.getenv('DB_PORT')
+        except KeyError as e:
+            print("KeyError Exception -", e)
 
-conn = psycopg2.connect(conn_string)
+        self.connection_string = \
+            f"dbname={db_name} user={db_username}  port={db_port}"
+            # f"dbname={db_name} user={db_username} password={db_password} port={db_port}"
+
+    def get_connection(self):
+        """ Return DB connection """
+        conn = psycopg2.connect(self.connection_string)
+        return conn
+
+    def close_connection(self):
+        """ Close the DB connection"""
