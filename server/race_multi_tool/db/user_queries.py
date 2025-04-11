@@ -8,8 +8,6 @@ def get_user_by_id(id_num: int):
     conn = db_connection.get_connection()
 
     cur = conn.cursor()
-    print("conn: ", conn)
-    print("cur: ", cur)
 
     cur.execute(f"SELECT * FROM users WHERE id = {id_num}")
     return cur.fetchone()
