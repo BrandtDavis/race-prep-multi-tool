@@ -32,13 +32,12 @@ function ProfilePage() {
 
               // Appropriately format possesive name for profile form title
               let possessiveName: string;
-              if(firstName.substring(firstName.length - 1).toLowerCase() !== 's') {
-                possessiveName = `${firstName}'s`
+              if(userData['first_name'].substring(userData['first_name'].length - 1).toLowerCase() !== 's') {
+                possessiveName = `${userData['first_name']}'s`
               }
               else {
-                possessiveName = `{firstName}'`
+                possessiveName = `${userData['first_name']}'`
               }
-              console.log("NAME", possessiveName)
               setFormattedFirstName(possessiveName)
           })()
       }, []);
