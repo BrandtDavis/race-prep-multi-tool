@@ -9,6 +9,7 @@ import Footer from "./components/Footer.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
 import DashboardPage from "./pages/DashboardPage.tsx";
 import NotFoundPage from "./pages/NotFoundPage.tsx";
+import ErrorPage from "./pages/ErrorPage.tsx"
 
 const Layout = () => {
   return (
@@ -23,6 +24,7 @@ const Layout = () => {
 const router = createBrowserRouter([
   {
     path: "/",
+    errorElement: <ErrorPage />,
     element: <Layout />,
     children: [
       {
