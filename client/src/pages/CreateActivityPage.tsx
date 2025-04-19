@@ -4,6 +4,23 @@ import SelectInput from "../components/inputs/selectInput";
 import TextInput from "../components/inputs/TextInput";
 import { useState } from "react";
 
+const createNewActivity = async () => {
+  const response = await fetch(
+    'http://localhost:5000/create_new_activity',
+  { 
+      method: 'POST',
+      headers: {
+          Accept: 'application/form-data',
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+      },
+  });
+
+  const data = await response.json();
+  console.log(data)
+  return data
+};
+
 function CreateActivityPage() {
   const [activityName, setActivityName] = useState("")
   const [activityType, setActivityType] = useState("")
@@ -80,7 +97,7 @@ function CreateActivityPage() {
               <div className="col-span-6 mb-4">
                 <CalculateButton
                   buttonText="Calculate"
-                  handleClick={() =>{}}
+                  handleClick={() =>{createNewActivity()}}
                 />
               </div>
           </div>
