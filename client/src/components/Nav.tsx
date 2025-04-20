@@ -4,7 +4,7 @@ const NavLinks = () => {
     return (
         <>
             <NavLink className="mr-4 text-white" to="/dashboard">Dashboard</NavLink>
-            <NavLink className="mr-4 text-white" to="/create-activity">Activities</NavLink>
+            <NavLink className="mr-4 text-white" to="/activities">Activities</NavLink>
             <NavLink className="mr-4 text-white" to="/pace-converter">Pacing</NavLink>
             <NavLink className="mr-4 text-white" to="/profile">Profile</NavLink>
         </>
