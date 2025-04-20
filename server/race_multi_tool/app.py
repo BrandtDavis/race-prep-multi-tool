@@ -62,7 +62,8 @@ def get_user_data():
 @app.route("/create_new_activity", methods=["POST"])
 def create_new_activity():
     """ Creates new activity based on supplied data """
-    create_new_activity_api()
+    form_data = request.json
+    create_new_activity_api(form_data)
     return jsonify({"status": 200})
 
 
