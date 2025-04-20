@@ -11,6 +11,10 @@ from .api.user_data import (
     get_user_data_by_id_api
 )
 
+from .api.activities import (
+    create_new_activity_api
+)
+
 app = Flask(__name__)
 cors = CORS(app, origin="*")
 
@@ -54,6 +58,14 @@ def get_user_data():
     data = get_user_data_by_id_api(user_id)
 
     return jsonify(data)
+
+@app.route("/create_new_activity", methods=["POST"])
+def create_new_activity():
+    """ Creates new activity based on supplied data """
+    form_data = request.json
+    create_new_activity_api(form_data)
+    return jsonify({"status": 200})
+
 
 if __name__ == 'main':
     app.run(debug=True)

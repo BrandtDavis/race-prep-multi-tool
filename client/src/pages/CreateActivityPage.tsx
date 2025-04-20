@@ -2,13 +2,40 @@ import CalculateButton from "../components/inputs/calculateButton";
 import NumericInput from "../components/inputs/numericInput";
 import SelectInput from "../components/inputs/selectInput";
 import TextInput from "../components/inputs/TextInput";
+import DateInput from "../components/inputs/DateInput"
+
 import { useState } from "react";
 
 function CreateActivityPage() {
   const [activityName, setActivityName] = useState("")
+  const [activityDate, setActivityDate] = useState("")
   const [activityType, setActivityType] = useState("")
   const [activityDistance, setActivityDistance] = useState("")
   const [activityUnits, setActivityUnits] = useState("")
+  
+  const createNewActivity = async () => {
+    const response = await fetch(
+      'http://localhost:5000/create_new_activity',
+    { 
+        method: 'POST',
+        headers: {
+            Accept: 'application/form-data',
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          activity_name: activityName,
+          activity_date: activityDate,
+          activity_type: activityType,
+          distance: activityDistance, 
+          units: activityUnits,
+        })
+    });
+  
+    const data = await response.json();
+    console.log(data)
+    return data
+  };
 
   return ( 
   <form className="w-full">
@@ -27,62 +54,76 @@ function CreateActivityPage() {
                 }
                 labelValue="Activity Name"
                 placeholder="Activity Name"
-                />
+              />
             </div>
 
-              <div className="col-span-6 mb-2">
-                <SelectInput 
-                  inputId="activityType"
-                  fieldName="activityType"
-                  fieldValue={activityType}
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    setActivityType(event.target.value)
-                  }
-                  labelValue="Activity Type"
-                  choices={[
-                    { value: "road_run", text: "Road Run" },
-                    { value: "trail_run", text: "Trail Run" },
-                    { value: "race", text: "Race" },
-                    { value: "treadmill_run", text: "Treadmill Run" },
+            <div className="col-span-6 mb-2">
+              <DateInput 
+                inputId="activityDate"
+                fieldName="activityDate"
+                fieldValue={activityDate}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                  setActivityDate(event.target.value)
+                }
+                labelValue="Activity Date"
+                placeholder="Activity Date"
+              />
+            </div>
+
+            <div className="col-span-6 mb-2">
+              <SelectInput 
+                inputId="activityType"
+                fieldName="activityType"
+                fieldValue={activityType}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                  setActivityType(event.target.value)
+                }
+                labelValue="Activity Type"
+                choices={[
+                  { value: "road_run", text: "Road Run" },
+                  { value: "trail_run", text: "Trail Run" },
+                  { value: "race", text: "Race" },
+                  { value: "treadmill_run", text: "Treadmill Run" },
                 ]}
-                />
-              </div>
+              />
+            </div>
 
-              <div className="col-span-6 mb-2">
-                <NumericInput
-                  inputId="activityDistance"
-                  fieldName="activityDistance"
-                  fieldValue={activityDistance}
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    setActivityDistance(event.target.value)
-                  }
-                  labelValue="Distance"
-                  placeholder="Distance"
-                />
-              </div>
+            <div className="col-span-6 mb-2">
+              <NumericInput
+                inputId="activityDistance"
+                fieldName="activityDistance"
+                fieldValue={activityDistance}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                  setActivityDistance(event.target.value)
+                }
+                labelValue="Distance"
+                placeholder="Distance"
+              />
+            </div>
 
-              <div className="col-span-6 mb-2">
-                <SelectInput
-                  inputId="activityUnits"
-                  fieldName="activityUnits"
-                  fieldValue={activityUnits}
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    setActivityUnits(event.target.value)
-                  }
-                  labelValue="Units"
-                  choices={[
-                      { value: "km", text: "KM" },
-                      { value: "mile", text: "Miles" },
-                  ]}
-                />
-              </div>
+            <div className="col-span-6 mb-2">
+              <SelectInput
+                inputId="activityUnits"
+                fieldName="activityUnits"
+                fieldValue={activityUnits}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                  setActivityUnits(event.target.value)
+                }
+                labelValue="Units"
+                choices={[
+                    { value: "km", text: "KM" },
+                    { value: "mile", text: "Miles" },
+                ]}
+              />
+            </div>
 
-              <div className="col-span-6 mb-4">
-                <CalculateButton
-                  buttonText="Calculate"
-                  handleClick={() =>{}}
-                />
-              </div>
+            <div className="col-span-6 mb-4">
+              <CalculateButton
+                buttonText="Add New Activity"
+                handleClick={() =>{createNewActivity()}}
+              />
+            </div>
+
           </div>
         </div>
       </div>
