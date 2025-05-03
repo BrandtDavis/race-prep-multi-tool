@@ -4,6 +4,7 @@ import App from "./App.tsx";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import PaceConverterPage from "./pages/PaceConverterPage.tsx";
 import CreateActivityPage from "./pages/CreateActivityPage.tsx";
+import ActivityListPage from "./pages/ActivityListPage.tsx";
 import Header from "./components/Header.tsx";
 import Footer from "./components/Footer.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <DashboardPage />,
+      },
+      {
+        path: "/activities",
+        element: <ActivityListPage />,
       },
       {
         path: "/create-activity",
