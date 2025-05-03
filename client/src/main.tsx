@@ -1,16 +1,17 @@
 import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App.tsx";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import PaceConverterPage from "./pages/PaceConverterPage.tsx";
-import CreateActivityPage from "./pages/CreateActivityPage.tsx";
-import ActivityListPage from "./pages/ActivityListPage.tsx";
-import Header from "./components/Header.tsx";
+import App from "./App.tsx";
 import Footer from "./components/Footer.tsx";
-import ProfilePage from "./pages/ProfilePage.tsx";
+import Header from "./components/Header.tsx";
+import "./index.css";
+import ActivityListPage from "./pages/ActivityListPage.tsx";
+import CreateActivityPage from "./pages/CreateActivityPage.tsx";
 import DashboardPage from "./pages/DashboardPage.tsx";
+import ErrorPage from "./pages/ErrorPage.tsx";
+import LoginPage from "./pages/LoginPage.tsx";
 import NotFoundPage from "./pages/NotFoundPage.tsx";
-import ErrorPage from "./pages/ErrorPage.tsx"
+import PaceConverterPage from "./pages/PaceConverterPage.tsx";
+import ProfilePage from "./pages/ProfilePage.tsx";
 
 const Layout = () => {
   return (
@@ -55,10 +56,15 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: '/login',
+    element: <LoginPage />,
+  },
+  {
     path: "*",
     element: <NotFoundPage />,
   },
 ]);
+
 createRoot(document.getElementById("root")!).render(
   <RouterProvider router={router} />,
 );
