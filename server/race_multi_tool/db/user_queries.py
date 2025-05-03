@@ -9,5 +9,5 @@ def get_user_by_id(id_num: int):
 
     cur = conn.cursor()
 
-    cur.execute(f"SELECT * FROM users WHERE id = {id_num}")
+    cur.execute(f"SELECT * FROM users WHERE id = '{id_num}'")
     return cur.fetchone()
