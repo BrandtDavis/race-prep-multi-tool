@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 const getUserData = async () => {
   const response = await fetch(
     'http://localhost:5000/get_user_data?' + new URLSearchParams({
-          user_id: "1",
+          user_id: "ed778dc6-d4bb-4949-a939-84160db43edb",
       }),
   { 
       method: 'GET',
