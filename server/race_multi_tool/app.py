@@ -18,6 +18,13 @@ from .api.activities import (
 app = Flask(__name__)
 cors = CORS(app, origin="*")
 
+@app.route("/login")
+def login():
+    """ Handles user login  """
+    # email = request.json("email")
+    # password = request.json("password")
+
+
 @app.route("/convert_speed", methods=["GET"])
 def convert_speed():
     """ Converts input speed (e.g., km/hr) to pace (e.g., min/km) """
