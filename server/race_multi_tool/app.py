@@ -15,14 +15,32 @@ from .api.activities import (
     create_new_activity_api
 )
 
+from .db.db import DatabaseConnection
+from .models.user import User
+
 app = Flask(__name__)
 cors = CORS(app, origin="*")
+db = DatabaseConnection()
 
-@app.route("/register_user")
+@app.route("/register_user", methods=["POST"])
 def register_user():
     """ Handles user registration  """
-    # email = request.json("email")
-    # password = request.json("password")
+    user = User(db)
+
+    email = request.form.get("email")
+    password = request.form.get("password")
+    first_name = request.form.get("first_name")
+    last_name = request.form.get("last_name")
+
+    if user.email_exists(email):
+        return jsonify({"Error": "email already in use"})
+
+    result = user.insert_user(email, password, first_name, last_name)
+
+    if result == "Error":
+        return jsonify({result: "An error occurred"})
+
+    return jsonify({result: "User registered successfully"})
 
 @app.route("/login")
 def login():
