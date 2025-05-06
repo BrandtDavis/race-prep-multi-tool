@@ -24,11 +24,14 @@ class User:
 
     def insert_user(self, email: str, password: str, first_name: str, last_name: str) -> str:
         """ Insert a new User to the DB """
-        self.cur.execute(f"\
-                 INSERT INTO users (id, email, password, first_name, last_name)\
-                 VALUES ('{self.get_uuid()}', '{email}', '{password}', '{first_name}', '{last_name}')\
-                 returning id;\
-                ")
+        insert_query = """
+            INSERT INTO users (id, email, password, first_name, last_name)
+            VALUES (%s, %s, %s, %s, %s)
+            returning id;
+        """
+
+        self.cur.execute(insert_query, (self.get_uuid(), email, password, first_name, last_name))
+
         new_row_id = self.cur.fetchone()
         if new_row_id is not None:
             self.conn.commit()
