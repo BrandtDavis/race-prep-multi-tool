@@ -3,7 +3,7 @@ import CalculateButton from "../components/inputs/calculateButton";
 import { useState } from "react";
 
 function LoginPage() {
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const loginUser = async () => {
@@ -17,7 +17,7 @@ function LoginPage() {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              username: username,
+              email: email,
               password: password,
             })
         });
@@ -36,14 +36,14 @@ function LoginPage() {
 
                         <div className="col-span-6 mb-2">
                             <TextInput 
-                                inputId="username"
-                                fieldName="username"
-                                fieldValue={username}
+                                inputId="email"
+                                fieldName="email"
+                                fieldValue={email}
                                 onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                                    setUsername(event.target.value)
+                                    setEmail(event.target.value)
                                 }
-                                labelValue="Username"
-                                placeholder="Username/Email"
+                                labelValue="Email"
+                                placeholder="Email"
                             />
                         </div>
 
