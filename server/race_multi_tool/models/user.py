@@ -24,6 +24,7 @@ class User:
 
     def insert_user(self, email: str, password: str, first_name: str, last_name: str) -> str:
         """ Insert a new User to the DB """
+
         insert_query = """
             INSERT INTO users (id, email, password, first_name, last_name)
             VALUES (%s, %s, %s, %s, %s)
@@ -31,8 +32,8 @@ class User:
         """
 
         self.cur.execute(insert_query, (self.get_uuid(), email, password, first_name, last_name))
-
         new_row_id = self.cur.fetchone()
+
         if new_row_id is not None:
             self.conn.commit()
             return "Success"
@@ -41,6 +42,7 @@ class User:
 
     def email_exists(self, email: str) -> bool:
         """ Determine if email is already in use """
+
         select_query = "SELECT * FROM users WHERE email = %s;"
         self.cur.execute(select_query, email)
         result = self.cur.fetchone()
@@ -49,6 +51,7 @@ class User:
 
     def get_user_by_id(self, user_id: UUID):
         """ Query for a user with a given id """
+
         select_query = "SELECT * FROM users WHERE id = %s"
         self.cur.execute(select_query, user_id)
 
