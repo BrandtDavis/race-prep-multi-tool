@@ -83,9 +83,10 @@ def convert_pace():
 @app.route("/get_user_data", methods=["GET"])
 def get_user_data():
     " Gets user data based on id "
+    user = User(db)
     user_id = request.args.get("user_id")
 
-    data = get_user_data_by_id_api(user_id)
+    data = user.get_user_by_id(user_id)
 
     return jsonify(data)
 
