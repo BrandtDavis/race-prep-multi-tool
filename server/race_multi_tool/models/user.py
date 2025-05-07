@@ -52,10 +52,17 @@ class User:
     def get_user_by_id(self, user_id: UUID):
         """ Query for a user with a given id """
 
-        select_query = "SELECT * FROM users WHERE id = %s"
-        self.cur.execute(select_query, user_id)
+        select_query = "SELECT first_name, last_name, email FROM users WHERE id = %s"
+        self.cur.execute(select_query, (user_id,))
 
-        return self.cur.fetchone()
+        row = self.cur.fetchone()
+        user_data = {
+            "first_name": row[0],
+            "last_name": row[1],
+            "email": row[2]
+        }
+
+        return user_data
 
     def update_user(self):
         """ Update a user's information """
