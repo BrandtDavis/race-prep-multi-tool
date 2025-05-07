@@ -7,10 +7,6 @@ from .api.pace_functions import (
     convert_pace_api
 )
 
-from .api.user_data import (
-    get_user_data_by_id_api
-)
-
 from .api.activities import (
     create_new_activity_api
 )
