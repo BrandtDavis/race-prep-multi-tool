@@ -41,10 +41,11 @@ class User:
 
     def email_exists(self, email: str) -> bool:
         """ Determine if email is already in use """
-        self.cur.execute(f"SELECT * FROM users WHERE email = '{email}'")
-
+        select_query = "SELECT * FROM users WHERE email = %s;"
+        
+        self.cur.execute(select_query, email)
         result = self.cur.fetchone()
-        print(result)
+        
         return result is not None
 
     def get_user_data(self, user_id: UUID):
