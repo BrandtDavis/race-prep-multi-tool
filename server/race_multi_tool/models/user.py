@@ -42,15 +42,16 @@ class User:
     def email_exists(self, email: str) -> bool:
         """ Determine if email is already in use """
         select_query = "SELECT * FROM users WHERE email = %s;"
-        
         self.cur.execute(select_query, email)
         result = self.cur.fetchone()
-        
+
         return result is not None
 
-    def get_user_data(self, user_id: UUID):
+    def get_user_by_id(self, user_id: UUID):
         """ Query for a user with a given id """
-        self.cur.execute(f"SELECT * FROM users WHERE id = '{user_id}'")
+        select_query = "SELECT * FROM users WHERE id = %s"
+        self.cur.execute(select_query, user_id)
+
         return self.cur.fetchone()
 
     def update_user(self):
