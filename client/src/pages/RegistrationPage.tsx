@@ -4,6 +4,8 @@ import TextInput from "../components/inputs/TextInput";
 import { useState } from "react";
 
 function RegistrationPage() {
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -37,6 +39,32 @@ function RegistrationPage() {
 
                         <div className="col-span-6 mb-2">
                             <TextInput 
+                                inputId="firstName"
+                                fieldName="firstName"
+                                fieldValue={firstName}
+                                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                                    setFirstName(event.target.value)
+                                }
+                                labelValue="First Name"
+                                placeholder="First Name"
+                            />
+                        </div>
+
+                        <div className="col-span-6 mb-2">
+                            <TextInput 
+                                inputId="lastName"
+                                fieldName="lastName"
+                                fieldValue={lastName}
+                                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                                    setLastName(event.target.value)
+                                }
+                                labelValue="Last Name"
+                                placeholder="Last Name"
+                            />
+                        </div>
+
+                        <div className="col-span-6 mb-2">
+                            <TextInput 
                                 inputId="email"
                                 fieldName="email"
                                 fieldValue={email}
@@ -63,14 +91,14 @@ function RegistrationPage() {
 
                         <div className="col-span-6 mb-2">
                             <TextInput 
-                                inputId="password"
-                                fieldName="password"
+                                inputId="confirmPassword"
+                                fieldName="confirmPassword"
                                 fieldValue={confirmPassword}
                                 onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                                     setConfirmPassword(event.target.value)
                                 }
-                                labelValue="Password"
-                                placeholder="Password"
+                                labelValue="Confirm Password"
+                                placeholder="Confirm Password"
                             />
                         </div>
                         <div className="col-span-6 mb-4">
