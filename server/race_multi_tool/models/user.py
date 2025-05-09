@@ -44,7 +44,7 @@ class User:
         """ Determine if email is already in use """
 
         select_query = "SELECT * FROM users WHERE email = %s;"
-        self.cur.execute(select_query, email)
+        self.cur.execute(select_query, (email,))
         result = self.cur.fetchone()
 
         return result is not None
