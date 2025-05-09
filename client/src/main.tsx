@@ -12,6 +12,7 @@ import LoginPage from "./pages/LoginPage.tsx";
 import NotFoundPage from "./pages/NotFoundPage.tsx";
 import PaceConverterPage from "./pages/PaceConverterPage.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
+import RegistrationPage from "./pages/RegistrationPage.tsx";
 
 const Layout = () => {
   return (
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <LoginPage />,
+  },
+  {
+    path: '/register',
+    element: <RegistrationPage />,
   },
   {
     path: "*",
