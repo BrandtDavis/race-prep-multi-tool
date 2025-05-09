@@ -25,11 +25,15 @@ def register_user():
 
     email = request.form.get("email")
     password = request.form.get("password")
+    confirm_password = request.form.get("confirmPassword")
     first_name = request.form.get("first_name")
     last_name = request.form.get("last_name")
 
     if user.email_exists(email):
         return jsonify({"Error": "email already in use"})
+
+    if password != confirm_password:
+        return jsonify({"Error": "password does not match confirm password"})
 
     result = user.insert_user(email, password, first_name, last_name)
 
