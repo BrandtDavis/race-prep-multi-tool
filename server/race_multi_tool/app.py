@@ -23,11 +23,14 @@ def register_user():
     """ Handles user registration  """
     user = User(db)
 
-    email = request.form.get("email")
-    password = request.form.get("password")
-    confirm_password = request.form.get("confirmPassword")
-    first_name = request.form.get("first_name")
-    last_name = request.form.get("last_name")
+    form_data = request.json
+    email = form_data["email"]
+    password = form_data["password"]
+    confirm_password = form_data["confirm_password"]
+    first_name = form_data["first_name"]
+    last_name = form_data["last_name"]
+
+    print(email)
 
     if user.email_exists(email):
         return jsonify({"Error": "email already in use"})
