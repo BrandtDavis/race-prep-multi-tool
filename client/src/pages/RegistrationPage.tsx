@@ -21,12 +21,16 @@ function RegistrationPage() {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
+              first_name: firstName, 
+              last_name: lastName,
               email: email,
               password: password,
-              confirmPassword: confirmPassword
+              confirm_password: confirmPassword
             })
         });
-        console.log(response)
+        const data = await response.json();
+        console.log(data)
+        return;
     };
 
     return (
