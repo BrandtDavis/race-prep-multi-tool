@@ -1,11 +1,16 @@
 """ This module stores the main 'commonly' used or misc. functions """
 
 import math
+from uuid import uuid4
 
 SPEED_UNITS = ["km/hour", "miles/hour"]
 PACE_UNITS = ["min/km", "min/mile"]
 
 MILES_TO_KM = 1.60934
+
+def get_uuid():
+    """ Return a uuid """
+    return uuid4().hex
 
 def convert_pace_to_speed(pace: str, current_unit: str, desired_unit: str):
     """ Converts pace (e.g., mins/km) to speed (e.g., miles/hour) """
