@@ -1,6 +1,16 @@
 """ Queries to interact specifically with the 'activities' table """
 from .db import DatabaseConnection
 
+def get_activity(db: DatabaseConnection, activity_id):
+    """ Get activity data by ID """
+    conn = db.get_connection()
+    cur = conn.cursor()
+
+    insert_query = "SELECT * FROM activities WHERE id = %s"
+    cur.execute(insert_query, (activity_id,))
+    return {""}
+
+
 def create_new_activiy(db: DatabaseConnection, activity_data):
     """ Get a specific user based on their ID """
     conn = db.get_connection()
