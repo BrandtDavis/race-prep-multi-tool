@@ -1,7 +1,7 @@
 """ Handle CRUD actions for activities"""
 
 from uuid import uuid4, UUID
-from ..utils.utils import get_uuid
+from ..utils.db_utils import get_uuid
 import psycopg2
 from ..db.db import DatabaseConnection
 
