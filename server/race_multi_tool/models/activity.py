@@ -38,5 +38,14 @@ class Activity:
         self.cur.execute(insert_query, data)
         self.conn.commit()
 
-    def get_activity(self, db, activity_id):
-        """ Get an activity """
+    def get_activity(self, activity_id: UUID):
+        """ Get an activity by ID """
+        select_query = """
+            SELECT *
+            FROM activities
+            WHERE id = %s
+        """
+
+        self.cur.execute(select_query, (activity_id))
+        row = self.cur.fetchone()
+        return row
