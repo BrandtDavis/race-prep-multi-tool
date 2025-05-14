@@ -1,6 +1,6 @@
 """ Handle CRUD actions for activities"""
 
-from uuid import uuid4, UUID
+from uuid import UUID
 import psycopg2
 from ..utils.db_utils import get_uuid
 from ..db.db import DatabaseConnection
@@ -17,10 +17,6 @@ class Activity:
     def __init__(self, db: DatabaseConnection):
         self.conn = db.get_connection()
         self.cur = self.conn.cursor()
-
-    def get_uuid(self):
-        """ Return a uuid """
-        return uuid4().hex
 
     def create_activity(self, activity_data):
         """ Get an activity """
