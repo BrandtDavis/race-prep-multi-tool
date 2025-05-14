@@ -1,8 +1,9 @@
 """ Handle user registration, login, logout actions """
 
-from uuid import uuid4, UUID
+from uuid import UUID
 import psycopg2
 from ..db.db import DatabaseConnection
+from ..utils.db_utils import get_uuid
 
 class User:
     """ Defines user data and related methods """
@@ -18,10 +19,6 @@ class User:
         self.conn = db.get_connection()
         self.cur = self.conn.cursor()
 
-    def get_uuid(self):
-        """ Return a uuid """
-        return uuid4().hex
-
     def insert_user(self, email: str, password: str, first_name: str, last_name: str) -> str:
         """ Insert a new User to the DB """
 
@@ -31,7 +28,7 @@ class User:
             returning id;
         """
 
-        self.cur.execute(insert_query, (self.get_uuid(), email, password, first_name, last_name))
+        self.cur.execute(insert_query, (get_uuid(), email, password, first_name, last_name))
         new_row_id = self.cur.fetchone()
 
         if new_row_id is not None:
