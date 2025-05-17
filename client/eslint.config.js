@@ -24,6 +24,10 @@ export default [
       "react/react-in-jsx-scope": "off",
       "react/jsx-uses-react": "off",
       "no-unused-vars": "warn",
+      "comma-dangle": ["warn", {
+        "arrays": "never",
+        "functions": "never",
+      }],
     },
   },
   {
