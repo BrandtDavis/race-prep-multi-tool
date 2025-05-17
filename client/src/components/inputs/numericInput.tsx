@@ -13,7 +13,7 @@ function NumericInput({
   fieldValue,
   onChange,
   labelValue,
-  placeholder,
+  placeholder
 }: props) {
   return (
     <>
