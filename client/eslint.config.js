@@ -25,9 +25,17 @@ export default [
       "react/jsx-uses-react": "off",
       "no-unused-vars": "warn",
       "comma-dangle": ["warn", {
-        "arrays": "never",
-        "functions": "never",
+        "objects": "only-multiline",
+        "arrays": "only-multiline",
+        "functions": "only-multiline",
       }],
+      "brace-style": ["warn", "1tbs", { "allowSingleLine": true }],
+      "space-before-function-paren": ["warn", {
+        "anonymous": "always",
+        "named": "never",
+        "asyncArrow": "always"
+      }],
+      "keyword-spacing": ["error", {"before": true}],
     },
   },
   {
