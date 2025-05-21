@@ -32,10 +32,9 @@ function ProfilePage() {
 
               // Appropriately format possesive name for profile form title
               let possessiveName: string;
-              if(userData['first_name'].substring(userData['first_name'].length - 1).toLowerCase() !== 's') {
+              if (userData['first_name'].substring(userData['first_name'].length - 1).toLowerCase() !== 's') {
                 possessiveName = `${userData['first_name']}'s`
-              }
-              else {
+              } else {
                 possessiveName = `${userData['first_name']}'`
               }
               setFormattedFirstName(possessiveName)
