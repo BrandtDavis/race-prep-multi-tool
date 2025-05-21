@@ -1,6 +1,6 @@
 import NumericInput from "../inputs/numericInput";
 import SelectInput from "../inputs/selectInput";
-import CalculateButton from "../inputs/calculateButton";
+import SubmitButton from "../inputs/SubmitButton";
 
 import { useState } from "react";
 
@@ -89,7 +89,7 @@ function SpeedCalculatorCard() {
                 </div>
 
                 <div className="col-span-6 mb-4">
-                    <CalculateButton
+                    <SubmitButton
                             buttonText="Calculate"
                             handleClick={() => handleClick()}
                     />

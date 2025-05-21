@@ -3,7 +3,7 @@ type Props = {
   handleClick: React.MouseEventHandler;
 };
 
-function CalculateButton({ buttonText, handleClick }: Props) {
+function SubmitButton({ buttonText, handleClick }: Props) {
   return (
     <>
       <button
@@ -17,4 +17,4 @@ function CalculateButton({ buttonText, handleClick }: Props) {
   );
 }
 
-export default CalculateButton;
+export default SubmitButton;

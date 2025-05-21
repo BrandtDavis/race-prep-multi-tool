@@ -1,4 +1,4 @@
-import CalculateButton from "../components/inputs/calculateButton";
+import SubmitButton from "../components/inputs/SubmitButton";
 import NumericInput from "../components/inputs/numericInput";
 import SelectInput from "../components/inputs/selectInput";
 import TextInput from "../components/inputs/TextInput";
@@ -118,7 +118,7 @@ function CreateActivityPage() {
             </div>
 
             <div className="col-span-6 mb-4">
-              <CalculateButton
+              <SubmitButton
                 buttonText="Add New Activity"
                 handleClick={() =>{createNewActivity()}}
               />
