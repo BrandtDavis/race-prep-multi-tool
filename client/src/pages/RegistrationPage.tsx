@@ -1,4 +1,4 @@
-import CalculateButton from "../components/inputs/calculateButton";
+import SubmitButton from "../components/inputs/SubmitButton";
 import TextInput from "../components/inputs/TextInput";
 
 import { useState } from "react";
@@ -106,7 +106,7 @@ function RegistrationPage() {
                             />
                         </div>
                         <div className="col-span-6 mb-4">
-                            <CalculateButton
+                            <SubmitButton
                                 buttonText="Register"
                                 handleClick={() =>{registerUser()}}
                             />

@@ -1,5 +1,5 @@
 import TextInput from "../components/inputs/TextInput";
-import CalculateButton from "../components/inputs/calculateButton";
+import SubmitButton from "../components/inputs/SubmitButton";
 import { useState } from "react";
 
 function LoginPage() {
@@ -60,7 +60,7 @@ function LoginPage() {
                             />
                         </div>
                         <div className="col-span-6 mb-4">
-                            <CalculateButton
+                            <SubmitButton
                                 buttonText="Sign In"
                                 handleClick={() =>{loginUser()}}
                             />
